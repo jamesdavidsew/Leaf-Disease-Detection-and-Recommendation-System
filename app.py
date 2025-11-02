@@ -1,26 +1,7 @@
-import streamlit as st
-
-st.title("Welcome to My Streamlit App 👋")
-st.subheader("This is a simple demo app.")
-st.write("If you see this message, Streamlit is displaying content correctly!")
-
-# Example of user interaction
-name = st.text_input("What's your name?")
-if name:
-    st.success(f"Hello, {name}! Great to see you.")
-
-
-
-
-
-
-
-
 from fastapi import FastAPI, Request, HTTPException, UploadFile, File
 from fastapi.responses import JSONResponse
 import logging
-import os
-from utils import convert_image_to_base64_and_test, test_with_base64_data
+from utils import convert_image_to_base64_and_test
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -40,15 +21,15 @@ async def disease_detection_file(file: UploadFile = File(...)):
         # Read uploaded file into memory
         contents = await file.read()
         
-    # Process file directly from memory
+        # Process file directly from memory
         result = convert_image_to_base64_and_test(contents)
-        
-    # No cleanup needed since file is not saved locally
         
         if result is None:
             raise HTTPException(status_code=500, detail="Failed to process image file")
+        
         logger.info("Disease detection from file completed successfully")
-        return JSONResponse(content=result)
+        return JSONResponse(status_code=200, content=result)
+    
     except HTTPException:
         raise
     except Exception as e:
