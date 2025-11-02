@@ -192,3 +192,14 @@ with col2:
                         st.write(response.text)
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
+
+# --- HIDE STREAMLIT DEFAULT MENU AND FOOTER ---
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
