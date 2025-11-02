@@ -1,3 +1,21 @@
+import streamlit as st
+
+st.title("Welcome to My Streamlit App 👋")
+st.subheader("This is a simple demo app.")
+st.write("If you see this message, Streamlit is displaying content correctly!")
+
+# Example of user interaction
+name = st.text_input("What's your name?")
+if name:
+    st.success(f"Hello, {name}! Great to see you.")
+
+
+
+
+
+
+
+
 from fastapi import FastAPI, Request, HTTPException, UploadFile, File
 from fastapi.responses import JSONResponse
 import logging
